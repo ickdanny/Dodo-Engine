@@ -1,0 +1,26 @@
+public class EP_Oval extends Projectile_Enemy {
+    protected String colorCode;
+    public EP_Oval(Vector initPos, Vector polar){
+        super(initPos, polar, 8);
+        setTrueHitbox(new Hitbox_Circle(this));
+        initSprite();
+    }
+    public EP_Oval(Vector initPos, Vector polar, String colorCode){
+        this(initPos, polar);
+        this.colorCode = colorCode;
+        initSprite();
+    }
+
+    @Override
+    protected void initSprite(){
+        double rotation = 0;
+        double size = (this.size * 1.3)/25;
+        Vector offset = new Vector(0, 0);
+        this.sprite = new SpriteInfo("PE_oval_" + colorCode, offset, rotation, size);
+    }
+
+    @Override
+    protected void updateSprite(){
+        this.sprite.setRotation(-polar.getA() + 180);
+    }
+}
